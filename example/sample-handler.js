@@ -32,13 +32,13 @@ const shouldBeExcludedTest = (props) => {
 }
 
 module.exports = {
-	init,
-	constructor,
-	destroyer,
-	normalRoute,
-	shouldBeExcluded, // this function should not be exposed because of the whitelist
+	normalRoute, // to be exposed as /normal-route route
+	shouldBeExcluded, // not to be exposed because of the whitelist
+	init, // not to be exposed because of default exclusion criteria
+	constructor, // not to be exposed because of default exclusion criteria
+	destroyer, // not to be exposed because of default exclusion criteria
 	exportedForTesting: {
-		testRoute,
-		shouldBeExcludedTest
+		testRoute, // to be exposed as /test/test-route route
+		shouldBeExcludedTest // this function should not be exposed because of the whitelist
 	}
 }

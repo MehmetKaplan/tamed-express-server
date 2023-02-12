@@ -34,14 +34,39 @@ The parameters for the `expressApp` function:
 ### Example 
 
 ```javascript
-const { expressApp } = require('tamed-express-app');
-
-let whitelist = ['normalRoute'];
-let testWhitelist = ['testRoute'];
-let fileFullPath = path.join(__dirname, '../example/sample-handler.js');
-
-expressApp(fileFullPath, whitelist, testWhitelist);
+// sample-handler.js
+...
+module.exports = {
+	normalRoute, // to be exposed as /normal-route route
+	shouldBeExcluded, // not to be exposed because of the whitelist
+	init, // not to be exposed because of default exclusion criteria
+	constructor, // not to be exposed because of default exclusion criteria
+	destroyer, // not to be exposed because of default exclusion criteria
+	exportedForTesting: {
+		testRoute, // to be exposed as /test/test-route route
+		shouldBeExcludedTest // this function should not be exposed because of the whitelist
+	}
+}
 ```
+
+```javascript
+// server.js
+const path = require('path');
+
+const tes = require('tamed-express-server');
+
+const startServer = async () => {
+	// httpsKeys, p_port, handlerFile, functionsWhitelist, testFunctionsWhitelist
+	let whitelist =['normalRoute'];
+	let testWhitelist = ['testRoute'];
+	let fileFullPath = path.join(__dirname, 'sample-handler.js');
+	tes.expressServer(undefined, 3000, fileFullPath, whitelist, testWhitelist);
+}
+
+startServer();
+```
+
+
 
 ### License
 
