@@ -12,7 +12,7 @@ It;
 - if there are whitelists for the functions, it will only serve the whitelisted functions (both the normal and the test ones)
 - and serves the remaining keys of the export as kebab-cased routes. 
 
-**The library assumes all the keys are functions that receive a single object (the `props`) and the response of those functions are directly passed to the response towards the client.**
+**The library assumes all the keys are functions that receive a single object (the `body`) and the response of those functions are directly passed to the response towards the client.**
 
 ### Installation
 

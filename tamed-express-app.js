@@ -17,15 +17,11 @@ const getParams = (body, query) => {
 	return query;
 }
 
-const callHandler = async (req, res, handler, paramsArr) => {
+const callHandler = async (req, res, handler) => {
 
-	const params = getParams(req.body, req.query);
+	const body = getParams(req.body, req.query);
 	try {
-		let paramsToSend = [];
-		for (let i = 0; i < paramsArr.length; i++) {
-			paramsToSend.push(params[paramsArr[i]]);
-		}
-		let l_result = await handler(...paramsToSend); // never use the return value, they are to be used for testing only
+		let l_result = await handler(body); // never use the return value, they are to be used for testing only
 		let l_responseJSON = {
 			status: 200,
 			result: 'OK',
@@ -91,19 +87,18 @@ const expressApp = (handlerFile, functionsWhitelist, testFunctionsWhitelist) => 
 	handlerFunctions.forEach((item) => {
 		// replace all D with d
 		let route = fromCamelToKebabCase(item.replace(/_/g, '/'));
-		app.all(`/${route}`, async (req, res) => { callHandler(req, res, handler[item], ['props']); });
+		app.all(`/${route}`, async (req, res) => { callHandler(req, res, handler[item]); });
 	});
 	// add the test functions to the server
 	/* istanbul ignore else */
 	if (handlerTestFunctions) {
 		handlerTestFunctions.forEach((item) => {
 			let route = fromCamelToKebabCase(item);
-			app.all(`/test/${route}`, async (req, res) => { callHandler(req, res, handler.exportedForTesting[item], ['props']) });
+			app.all(`/test/${route}`, async (req, res) => { callHandler(req, res, handler.exportedForTesting[item]) });
 		});
 	}
 	return resolve();
 });
-
 
 module.exports = {
 	app,

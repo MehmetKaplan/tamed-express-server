@@ -1,37 +1,37 @@
 /* istanbul ignore next */
-const init = (props) => {
+const init = (data) => {
 	throw new Error('Should not be called via a route');
 }
 
 /* istanbul ignore next */
-const constructor = (props) => {
+const constructor = (data) => {
 	throw new Error('Should not be called via a route');
 }
 
 /* istanbul ignore next */
-const destroyer = (props) => {
+const destroyer = (data) => {
 	throw new Error('Should not be called via a route');
 }
 
-const normalRoute = (props) => {
-	return { status: 'OK', payload: props };
+const normalRoute = (data) => {
+	return { status: 'OK', payload: data };
 }
 
-const folder1_folder2_normalRoute = (props) => {
-	return { status: 'OK', payload: props };
+const folder1_folder2_normalRoute = (data) => {
+	return { status: 'OK', payload: data };
 }
 
-const testRoute = (props) => {
-	return { status: 'OK', payload: props };
+const testRoute = (data) => {
+	return { status: 'OK', payload: data };
 }
 
 /* istanbul ignore next */
-const shouldBeExcluded = (props) => {
+const shouldBeExcluded = (data) => {
 	throw new Error('Should not be called via a route');
 }
 
 /* istanbul ignore next */
-const shouldBeExcludedTest = (props) => {
+const shouldBeExcludedTest = (data) => {
 	throw new Error('Should not be called via a route');
 }
 
