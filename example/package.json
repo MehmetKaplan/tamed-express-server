@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "tamed-express-server": "^1.0.3"
+    "tamed-express-server": "^1.0.4"
   }
 }

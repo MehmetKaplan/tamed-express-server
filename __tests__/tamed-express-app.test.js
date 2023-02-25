@@ -6,7 +6,7 @@ const { app, expressApp } = require('../tamed-express-app.js');
 
 describe('Test the methods in the sample-handler file', () => {
 	beforeAll(() => {
-		let whitelist = ['normalRoute'];
+		let whitelist = ['normalRoute', 'folder1_folder2_normalRoute'];
 		let testWhitelist = ['testRoute'];
 		let fileFullPath = path.join(__dirname, '../example/sample-handler.js');
 		expressApp(fileFullPath, whitelist, testWhitelist);
@@ -15,6 +15,16 @@ describe('Test the methods in the sample-handler file', () => {
 	test('/normal-route should succeed', async () => {
 		let propsToSendAndReceiveBack = { a: 1, b: 2 };
 		let route = "/normal-route";
+		const response = await request(app).post(route).send({ props: propsToSendAndReceiveBack });
+		tickLog.info(`\x1b[1;33m${route}\x1b[0m response.text:\n${JSON.stringify(JSON.parse(response.text), null, 2)}`, true);
+		let result = JSON.parse(response.text);
+		expect(response.statusCode).toBe(200);
+		expect(result.payload).toEqual(propsToSendAndReceiveBack);
+	});
+
+	test('/folder1/folder2/normal-route should succeed', async () => {
+		let propsToSendAndReceiveBack = { a: 1, b: 2 };
+		let route = "/folder1/folder2/normal-route";
 		const response = await request(app).post(route).send({ props: propsToSendAndReceiveBack });
 		tickLog.info(`\x1b[1;33m${route}\x1b[0m response.text:\n${JSON.stringify(JSON.parse(response.text), null, 2)}`, true);
 		let result = JSON.parse(response.text);

@@ -1,6 +1,9 @@
 ### Why?
 
-This library is implemented to convert a `.js` file quickly to an Express server, using the exported function names as routes (by converting them from `CamelCase` to `kebab-case`).
+This library is implemented to convert a `.js` file quickly to an Express server, using the exported function names as routes. The rules to convert function names to rotes are:
+
+1. Function names of the form `CamelCase` are converted to `kebab-case`).
+2. The underscore character `_` is converted to a slash `/`.
 
 It;
 - takes the file as a parameter, 

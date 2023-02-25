@@ -17,6 +17,10 @@ const normalRoute = (props) => {
 	return { status: 'OK', payload: props };
 }
 
+const folder1_folder2_normalRoute = (props) => {
+	return { status: 'OK', payload: props };
+}
+
 const testRoute = (props) => {
 	return { status: 'OK', payload: props };
 }
@@ -33,6 +37,7 @@ const shouldBeExcludedTest = (props) => {
 
 module.exports = {
 	normalRoute, // to be exposed as /normal-route route
+	folder1_folder2_normalRoute, // to be exposed as /folder1/folder2/normal-route route
 	shouldBeExcluded, // not to be exposed because of the whitelist
 	init, // not to be exposed because of default exclusion criteria
 	constructor, // not to be exposed because of default exclusion criteria
