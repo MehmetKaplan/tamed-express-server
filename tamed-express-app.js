@@ -91,7 +91,6 @@ const expressApp = (handlerFile, functionsWhitelist, testFunctionsWhitelist) => 
 	handlerFunctions.forEach((item) => {
 		// replace all D with d
 		let route = fromCamelToKebabCase(item.replace(/_/g, '/'));
-console.log(`route is: /${route}`); //deleteme
 		app.all(`/${route}`, async (req, res) => { callHandler(req, res, handler[item], ['props']); });
 	});
 	// add the test functions to the server
