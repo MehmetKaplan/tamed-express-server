@@ -1,6 +1,6 @@
 {
 	"name": "tamed-express-server",
-	"version": "2.0.2",
+	"version": "3.0.1",
 	"description": "A quick express server that converts a js file to express routes, using the js file's exported functions.",
 	"main": "tamed-express-server.js",
 	"repository": "https://github.com/mehmetkaplan/tamed-express-server",
@@ -27,10 +27,10 @@
 		"superagent": "^8.0.9",
 		"supertest": "^6.3.3"
 	},
-	"keywords":	[
-		"express", 
-		"function name to route", 
-		"js to express", 
+	"keywords": [
+		"express",
+		"function name to route",
+		"js to express",
 		"js to express routes"
 	]
 }
