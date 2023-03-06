@@ -22,13 +22,19 @@ const callHandler = async (req, res, handler) => {
 	const body = getParams(req.body, req.query);
 	try {
 		let l_result = await handler(body); // never use the return value, they are to be used for testing only
-		let l_responseJSON = {
-			status: 200,
-			result: 'OK',
+		if (l_result?.payload) {
+			let l_responseJSON = {
+				status: 200,
+				result: 'OK',
+			}
+			l_responseJSON.payload = l_result.payload;
+			res.set('Content-Type', 'application/json');
+			res.json(l_responseJSON);
 		}
-		/* istanbul ignore next */
-		if (l_result?.payload) l_responseJSON.payload = l_result.payload;
-		res.json(l_responseJSON);
+		else 		/* istanbul ignore next */ {
+			res.set('Content-Type', 'text/html');
+			res.send(l_result);
+		}
 	} catch (error) {
 		/* istanbul ignore next */
 		res.json({

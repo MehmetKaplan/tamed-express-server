@@ -2,7 +2,7 @@
 
 This library is implemented to convert a `.js` file quickly to an Express server, using the exported function names as routes. The rules to convert function names to rotes are:
 
-1. Function names of the form `CamelCase` are converted to `kebab-case`).
+1. Function names of the form `camelCase` are converted to `kebab-case`).
 2. The underscore character `_` is converted to a slash `/`.
 
 It;
@@ -10,7 +10,9 @@ It;
 - analyze the exported keys (assuming all exports are functions or the special `exportedForTesting` object where its keys are also only functions), 
 - exclude the reserved exports `constructor`, `init`, `destroyer` functions and `exportedForTesting` object
 - if there are whitelists for the functions, it will only serve the whitelisted functions (both the normal and the test ones)
-- and serves the remaining keys of the export as kebab-cased routes. 
+- and serves the remaining keys of the export as kebab-cased routes.
+	- If the handler returns a `payload` response is served as `application/json` with the `payload` as the body.
+	- If the handler returns a `string` response is served as `text/plain` with the `string` as the body.
 
 **The library assumes all the keys are functions that receive a single object (the `body`) and the response of those functions are directly passed to the response towards the client.**
 
